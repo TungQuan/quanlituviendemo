@@ -56,7 +56,13 @@ Route::post('admincaptinh/tuvien/chinhsua','TuVienController@postChinhSua');
 Route::group(['middleware'=>['membermiddleware','logoutmiddleware']], function(){
 
 	Route::get('/member/logout','MemberController@getMemberLogout');
-	
+//---------------------Admin Cap tinh 
+
+//---------------------VĂN BẢN
+	Route::get('taodon','PDFController@getDon');
+	Route::get('convertToPDF1','PDFController@convertToPDF1');
+//---------------------VĂN BẢN
+
 //---------------------Admin Cap tinh -----------------------------------------------//
 	Route::group(['prefix'=>'admincaptinh'], function(){
 
@@ -108,7 +114,7 @@ Route::group(['middleware'=>['membermiddleware','logoutmiddleware']], function()
 			// Route::get('danhsachdontu/donxinxuatgia','VanBanController@getDonXinXuatGia');
 
 			Route::get('taodon','PDFController@getDon');
-				// Route::get('getpdf1','PDFController@pdf');
+			Route::get('convertToPDF1','PDFController@convertToPDF1');
 
 			
 		});

@@ -226,7 +226,7 @@ margin-left: 10px;
         }
         </script> -->
         <div class="btn-pdf">
-          <a href="{{ url('admin/vanban/getpdf1') }}" class="btn btn-danger">Convert into PDF</a>
+          <a href="{{ url('admincaptinh/vanban/convertToPDF1') }}" class="btn btn-danger">Convert into PDF</a>
         </div>
       </page>
     </div>
