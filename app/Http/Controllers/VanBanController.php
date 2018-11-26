@@ -29,21 +29,21 @@ class VanBanController extends Controller
         $tangniid = $user->id_tangni;
         $roleid = $this->getRoleID($userid);
         $phapdanh = $this->getPhapDanh($tangniid);
-        if($roleid === 1){
-           	$vanban=DB::table('vanban')->select('*')->get();
-			return view('admincaptinh/vanban/danhsach',['vanban'=>$vanban,'phapdanh'=>$phapdanh]); 
+        $vanban=DB::table('vanban')->select('*')->get();
+        if($roleid === 1){       	
+			return view('admincaptinh/vanban/thongbao/danhsach',['vanban'=>$vanban,'phapdanh'=>$phapdanh]); 
         }
         else if($roleid === 2){
-            return view('admincaphuyen/vanban/danhsach',['vanban'=>$vanban]);
+            return view('admincaphuyen/vanban/thongbao/danhsach',['vanban'=>$vanban,'phapdanh'=>$phapdanh]);
         }
         else if($role_id === 3 ){
-            return view('admincapxa/vanban/danhsach',['vanban'=>$vanban]);
+            return view('admincapxa/vanban/thongbao/danhsach',['vanban'=>$vanban,'phapdanh'=>$phapdanh]);
         }
         else if($role_id === 4 ){
-            return view('admincaptuvien/vanban/danhsach',['vanban'=>$vanban]);
+            return view('admincaptuvien/vanban/thongbao/danhsach',['vanban'=>$vanban,'phapdanh'=>$phapdanh]);
         }
         else{
-            return view('nguoidungthuong/vanban/danhsach',['vanban'=>$vanban]);
+            return view('nguoidungthuong/vanban/thongbao/danhsach',['vanban'=>$vanban,'phapdanh'=>$phapdanh]);
         }
 	}
 
@@ -57,27 +57,30 @@ class VanBanController extends Controller
         $roleid = $this->getRoleID($userid);
         $phapdanh = $this->getPhapDanh($tangniid);
         if($roleid === 1){
-			return view('admincaptinh/vanban/uploadvanban',['phapdanh'=>$phapdanh]);
+			return view('admincaptinh/vanban/thongbao/uploadvanban',['phapdanh'=>$phapdanh]);
         }
         else if($roleid === 2){
-            return view('admincaphuyen/vanban/uploadvanban',['phapdanh'=>$phapdanh]);
+            return view('admincaphuyen/vanban/thongbao/uploadvanban',['phapdanh'=>$phapdanh]);
         }
         else if($role_id === 3 ){
-            return view('admincapxa/vanban/uploadvanban',['phapdanh'=>$phapdanh]);
+            return view('admincapxa/vanban/thongbao/uploadvanban',['phapdanh'=>$phapdanh]);
         }
         else if($role_id === 4 ){
-            return view('admincaptuvien/vanban/uploadvanban',['phapdanh'=>$phapdanh]);
+            return view('admincaptuvien/vanban/thongbao/uploadvanban',['phapdanh'=>$phapdanh]);
         }
         else{
-            return view('nguoidungthuong/vanban/uploadvanban',['phapdanh'=>$phapdanh]);
+            return view('nguoidungthuong/vanban/thongbao/uploadvanban',['phapdanh'=>$phapdanh]);
         }
 	}
 	public function postVanBan(request $request){
         $this->validate($request,
-            ['tenvanban'=>'required|min:3|max:100'
+            ['tenvanban'=>'required|min:3|max:100',
+                'vanban'=>'required'
             ],
+
             [
-                'tenvanban.required'=>'Bạn chưa nhập tên văn bản' 
+                'tenvanban.required'=>'Bạn chưa nhập tên văn bản',
+                'vanban.required'=>'Bạn chưa chọn văn bản'
             ]
         );
 

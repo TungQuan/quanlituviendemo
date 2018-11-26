@@ -12,6 +12,7 @@ use Session;
 use PDF;
 use App;
 use View;
+use Carbon\Carbon;
 use Dompdf\Dompdf;
 class PDFController extends Controller
 {
@@ -48,32 +49,87 @@ class PDFController extends Controller
             return view('nguoidungthuong/vanban/dontu/donxinxuatgia',['phapdanh'=>$phapdanh]);
         }
     }
-
-    public function convertToPDF1()
+    public function getDanhSachDon()
     {
-    	$user = Auth::guard('user')->user();
+        $user = Auth::guard('user')->user();
         $userid = $user->id;
         $tangniid = $user->id_tangni;
         $roleid = $this->getRoleID($userid);
         $phapdanh = $this->getPhapDanh($tangniid);
+        $dontu=DB::table('dontu')->select('*')->get();
         if($roleid === 1){
-        	return PDF::loadFile('http://localhost:8888/quanlituviendemo/public/admincaptinh/vanban/taodon')->inline('github.pdf');
+            return view('admincaptinh/vanban/dontu/danhsachdon',['dontu'=>$dontu,'phapdanh'=>$phapdanh]);
         }
         else if($roleid === 2){
-            return view('admincaphuyen/vanban/dontu/donxinxuatgia',['phapdanh'=>$phapdanh]);
+            return view('admincaphuyen/vanban/dontu/donxinxuatgia',['dontu'=>$dontu,'phapdanh'=>$phapdanh]);
         }
         else if($role_id === 3 ){
-            return view('admincapxa/vanban/dontu/donxinxuatgia',['phapdanh'=>$phapdanh]);
+            return view('admincapxa/vanban/dontu/danhsachdon',['dontu'=>$dontu,'phapdanh'=>$phapdanh]);
         }
         else if($role_id === 4 ){
-            return view('admincaptuvien/vanban/dontu/donxinxuatgia',['phapdanh'=>$phapdanh]);
+            return view('admincaptuvien/vanban/dontu/danhsachdon',['dontu'=>$dontu,'phapdanh'=>$phapdanh]);
         }
         else{
-            return view('nguoidungthuong/vanban/dontu/donxinxuatgia',['phapdanh'=>$phapdanh]);
+            return view('nguoidungthuong/vanban/dontu/danhsachdon',['dontu'=>$dontu,'phapdanh'=>$phapdanh]);
         }
-  //   	$pdf = App::make('dompdf.wrapper');
-		// $pdf->loadHTML('<h1>Test</h1>');
-		// return $pdf->stream();
-		
     }
+    public function getDonToUpload()
+    {
+        $user = Auth::guard('user')->user();
+        $userid = $user->id;
+        $tangniid = $user->id_tangni;
+        $roleid = $this->getRoleID($userid);
+        $phapdanh = $this->getPhapDanh($tangniid);
+        $dontu=DB::table('dontu')->select('*')->get();
+        if($roleid === 1){
+            return view('admincaptinh/vanban/dontu/uploaddon',['dontu'=>$dontu,'phapdanh'=>$phapdanh]);
+        }
+        else if($roleid === 2){
+            return view('admincaphuyen/vanban/dontu/uploaddon',['dontu'=>$dontu,'phapdanh'=>$phapdanh]);
+        }
+        else if($role_id === 3 ){
+            return view('admincapxa/vanban/dontu/uploaddon',['dontu'=>$dontu,'phapdanh'=>$phapdanh]);
+        }
+        else if($role_id === 4 ){
+            return view('admincaptuvien/vanban/dontu/uploaddon',['dontu'=>$dontu,'phapdanh'=>$phapdanh]);
+        }
+        else{
+            return view('nguoidungthuong/vanban/dontu/uploaddon',['dontu'=>$dontu,'phapdanh'=>$phapdanh]);
+        }
+    }
+
+    public function postDonToUpload(request $request){
+        $this->validate($request,
+            ['tendon'=>'required|min:3|max:100',
+            'dontu'=>'required'
+            ],
+            [
+            'tendon.required'=>'Bạn chưa nhập tên đơn',
+            'dontu.required'=>'Bạn chưa chọn đơn'
+            ]);
+
+        $tendon=$request->tendon;
+        $ngaytao=carbon::now();
+        $ghichu=$request->ghichu;
+        if ($request->hasFile('dontu'))
+        {
+            $file=$request->file('dontu');
+            $name = $file->getClientOriginalName();
+            $dontu1 = str_random(4)."_".$name;
+            while (file_exists('vanban/dontu/'.$dontu1))
+            {
+                $dontu1 = str_random(4)."_".$name;
+            }
+            $file->move('vanban/dontu',$dontu1);
+            $dontu=$dontu1;
+        }
+        else 
+        {
+            $dontu->chondon = null;
+        }
+        DB::table('dontu')->insertGetId( 
+          ['tendon'=>$tendon, 'ghichu'=>$ghichu, 'ngaytao'=>$ngaytao, 'chondon'=>$dontu]
+        );
+        return redirect('admincaptinh/vanban/uploaddontu')->with('thongbao','Thêm Thông Báo Thành Công!');
+   }
 }

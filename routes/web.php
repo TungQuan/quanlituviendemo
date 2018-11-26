@@ -58,11 +58,6 @@ Route::group(['middleware'=>['membermiddleware','logoutmiddleware']], function()
 	Route::get('/member/logout','MemberController@getMemberLogout');
 //---------------------Admin Cap tinh 
 
-//---------------------VĂN BẢN
-	Route::get('taodon','PDFController@getDon');
-	Route::get('convertToPDF1','PDFController@convertToPDF1');
-//---------------------VĂN BẢN
-
 //---------------------Admin Cap tinh -----------------------------------------------//
 	Route::group(['prefix'=>'admincaptinh'], function(){
 
@@ -106,15 +101,16 @@ Route::group(['middleware'=>['membermiddleware','logoutmiddleware']], function()
 		});
 			//Route::get('edittrangthai','AjaxController@getTrangThaiEdit');
 			///--- Văn Bản ------------//
+		
 		Route::group(['prefix'=>'vanban'],function(){
 			Route::get('danhsachthongbao', 'VanBanController@getDanhSach');
 			Route::get('uploadthongbao','VanBanController@getVanBan');
 			Route::post('uploadthongbao','VanBanController@postVanban');
-			
-			// Route::get('danhsachdontu/donxinxuatgia','VanBanController@getDonXinXuatGia');
 
+			Route::get('danhsachdontu','PDFController@getDanhSachDon');
 			Route::get('taodon','PDFController@getDon');
-			Route::get('convertToPDF1','PDFController@convertToPDF1');
+			Route::get('uploaddontu','PDFController@getDonToUpload');
+			Route::post('uploaddontu','PDFController@postDonToUpload');
 
 			
 		});

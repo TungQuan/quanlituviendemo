@@ -99,7 +99,10 @@
                                         <a href="admincaptinh/vanban/uploadthongbao" class="title-li">Thêm Thông Báo</a>
                                     </li>
                                     <li>
-                                        <a href="#" class="title-li">Danh Sách Đơn</a>
+                                        <a href="admincaptinh/vanban/danhsachdontu" class="title-li">Danh Sách Đơn</a>
+                                    </li>
+                                    <li>
+                                        <a href="admincaptinh/vanban/uploaddontu" class="title-li">Upload Đơn</a>
                                     </li>
                                     <li>
                                         <a href="admincaptinh/vanban/taodon" class="title-li">Tạo Đơn</a>
