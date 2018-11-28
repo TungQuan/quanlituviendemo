@@ -97,7 +97,7 @@
                                 <label class="control-label col-sm-4 " for="inputName">
                                 Ghi Chú:</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control " id="inputTen" name="ghichu" placeholder="Nhập ghi chú" required>
+                                    <input type="text" class="form-control " id="inputTen" name="ghichu" placeholder="Nhập ghi chú">
                                 </div>
                                 <span style="color: red;">
                                         {{$errors->first('ghichu')}}
@@ -108,7 +108,7 @@
                             <div class="form-group" {{$errors->has('dontu') ? 'has-error' : ''}}>
                                 <label class="control-label col-sm-4 " for="inputVanBan"> Chọn Đơn: </label>
                                 <div class="col-sm-4">
-                                    <input type="file" class="form-control" id="inputdontu" name="dontu">
+                                    <input type="file" class="form-control" id="inputdontu" name="dontu" required="required">
                                 </div>
                                 <span style="color: red;">
                                         {{$errors->first('dontu')}}                                        

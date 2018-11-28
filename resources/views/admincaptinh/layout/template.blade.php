@@ -93,19 +93,23 @@
                                 <a class="title-ul" ><i class="fa fa-file fa-2x"></i>&nbsp;Quản Lý Văn Bản<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level ">
                                     <li>
-                                        <a href="admincaptinh/vanban/danhsachthongbao" class="title-li">Danh Sách Thông Báo</a>
-                                    </li>
-                                    <li>
                                         <a href="admincaptinh/vanban/uploadthongbao" class="title-li">Thêm Thông Báo</a>
                                     </li>
                                     <li>
-                                        <a href="admincaptinh/vanban/danhsachdontu" class="title-li">Danh Sách Đơn</a>
+                                        <a href="admincaptinh/vanban/danhsachthongbao" class="title-li">Danh Sách Thông Báo</a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="admincaptinh/vanban/taodon" class="title-li">Tạo Đơn</a>
                                     </li>
                                     <li>
                                         <a href="admincaptinh/vanban/uploaddontu" class="title-li">Upload Đơn</a>
                                     </li>
                                     <li>
-                                        <a href="admincaptinh/vanban/taodon" class="title-li">Tạo Đơn</a>
+                                        <a href="admincaptinh/vanban/danhsachdontu" class="title-li">Danh Sách Đơn</a>
+                                    </li>
+                                    <li>
+                                        <a href="admincaptinh/vanban/guidon" class="title-li">Gửi Thông Báo</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->

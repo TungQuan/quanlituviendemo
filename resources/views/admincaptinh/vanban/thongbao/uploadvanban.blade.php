@@ -97,7 +97,7 @@
                                 <label class="control-label col-sm-4 " for="inputName">
                                 Công văn số:</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control " id="inputTen" name="congvanso" placeholder="Nhập số công văn" required>
+                                    <input type="text" class="form-control " id="inputTen" name="congvanso" placeholder="Nhập số công văn">
                                 </div>
                                 <span style="color: red;">
                                         {{$errors->first('congvanso')}}
@@ -119,7 +119,7 @@
                                 <label class="control-label col-sm-4 " for="inputName">
                                 Nội dung tom tắt:</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control " id="inputTen" name="noidungtomtat" placeholder="Nhập ghi chú" required>
+                                    <input type="text" class="form-control " id="inputTen" name="noidungtomtat" placeholder="Nhập ghi chú">
                                 </div>
                                 <span style="color: red;">
                                         {{$errors->first('noidungtomtat')}}
@@ -130,7 +130,7 @@
                                 <label class="control-label col-sm-4 " for="inputName">
                                 Ghi Chú:</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control " id="inputTen" name="ghichu" placeholder="Nhập ghi chú" required>
+                                    <input type="text" class="form-control " id="inputTen" name="ghichu" placeholder="Nhập ghi chú">
                                 </div>
                                 <span style="color: red;">
                                         {{$errors->first('ghichu')}}
@@ -142,7 +142,7 @@
                             <div class="form-group" {{$errors->has('vanban') ? 'has-error' : ''}}>
                                 <label class="control-label col-sm-4 " for="inputVanBan" >Văn Bản</label>
                                 <div class="col-sm-4">
-                                    <input type="file" class="form-control" id="inputVanBan" name="vanban">
+                                    <input type="file" class="form-control" id="inputVanBan" name="vanban" required="required">
                                 </div>
                                 <span style="color: red;">
                                         {{$errors->first('vanban')}}                                        

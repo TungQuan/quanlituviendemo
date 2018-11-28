@@ -132,4 +132,44 @@ class PDFController extends Controller
         );
         return redirect('admincaptinh/vanban/uploaddontu')->with('thongbao','Thêm Thông Báo Thành Công!');
    }
+    public function getTrangThai($id){
+        $dt=DB::table('dontu')->where('id', $id)->first();
+        if($dt->trangthai==0){
+            DB::table('dontu')
+            ->where('id', $id)
+            ->update(array('trangthai' => 1));
+        }
+        else{
+            DB::table('dontu')
+            ->where('id', $id)
+            ->update(array('trangthai' => 0));
+        }
+        return redirect()->back();
+    }
+    public function getGuiDon(){
+        $user = Auth::guard('user')->user();
+        $userid = $user->id;
+        $tangniid = $user->id_tangni;
+        $roleid = $this->getRoleID($userid);
+        $phapdanh = $this->getPhapDanh($tangniid);
+        if($roleid === 1){
+            $tuvien = DB::table('TuVien')->join('XaPhuong','TuVien.XaPhuongID','=','XaPhuong.XaPhuongID') 
+            -> join('QuanHuyen','XaPhuong.QuanHuyenID','=','QuanHuyen.QuanHuyenID')
+            ->join('TrangThai','TuVien.TrangThaiID','=','TrangThai.TrangThaiID')
+            ->select('TuVienID','TuVien_Ten','XaPhuong_Ten','QuanHuyen_Ten','TrangThai_Ten','trutri','phone','diachi')->get();
+            return view('admincaptinh/vanban/thongbao/guithongbao',['phapdanh'=>$phapdanh,'tuvien'=>$tuvien]);
+        }
+        else if($roleid === 2){
+            return view('admincaphuyen/vanban/thongbao/guithongbao',['phapdanh'=>$phapdanh]);
+        }
+        else if($role_id === 3 ){
+            return view('admincapxa/vanban/thongbao/guithongbao',['phapdanh'=>$phapdanh]);
+        }
+        else if($role_id === 4 ){
+            return view('admincaptuvien/vanban/thongbao/guithongbao',['phapdanh'=>$phapdanh]);
+        }
+        else{
+            return view('nguoidungthuong/vanban/thongbao/guithongbao',['phapdanh'=>$phapdanh]);
+        }
+    }
 }

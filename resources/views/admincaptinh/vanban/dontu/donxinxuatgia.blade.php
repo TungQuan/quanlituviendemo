@@ -40,11 +40,11 @@
         var i=0;
         $('#add1').click(function(){
         i++;
-        $('#addcontent1').append('<tr id="row'+i+'"> <td><b><input name="inp_left'+i+'" type="text" style="border: none; border-bottom: 1px dotted black;width:100px">:</b></td> <td><input name="inp_right'+i+'" type=" text" style="border: none; border-bottom: 1px dotted black; width:500px"></td> <td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove0" style="margin-left:10px">-</button></td> </tr> ');
+        $('#addcontent1').append('<tr id="row2'+i+'"> <td><b><input name="inp_left'+i+'" type="text" style="border: none; border-bottom: 1px dotted black;width:100px">:</b></td> <td><input name="inp_right'+i+'" type=" text" style="border: none; border-bottom: 1px dotted black; width:500px"></td> <td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_removea" style="margin-left:10px">-</button></td> </tr> ');
         });
-        $(document).on('click', '.btn_remove0', function(){
+        $(document).on('click', '.btn_removea', function(){
         var button_id = $(this).attr("id");
-        $('#row'+button_id+'').remove();
+        $('#row2'+button_id+'').remove();
         });
         $('#submit').click(function(){
         $.ajax({

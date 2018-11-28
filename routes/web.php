@@ -111,8 +111,8 @@ Route::group(['middleware'=>['membermiddleware','logoutmiddleware']], function()
 			Route::get('taodon','PDFController@getDon');
 			Route::get('uploaddontu','PDFController@getDonToUpload');
 			Route::post('uploaddontu','PDFController@postDonToUpload');
-
-			
+			Route::get('trangthai/{id}','PDFController@getTrangThai');
+			Route::get('guidon','PDFController@getGuiDon');
 		});
 			///--- Kết Thúc Văn Bản ------------//
 

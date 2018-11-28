@@ -139,9 +139,20 @@ class AjaxController extends Controller
     }
     public function getXaPhuongEdit($quanhuyenid){
        $xaphuong = DB::table('xaphuong')->select('XaphuongID, XaPhuong_Ten')->where('QuanHuyenID','=',$quanhuyenid)->get();
+      
       echo "<option value=''></option>";
           foreach($xaphuong as $xp){
               echo "<option value='".$xp->XaPhuongID."'>".$xp->XaPhuong_Ten."</option>";
           }
+
+          echo "<table class='table table-bordered'>";
+          echo "<thead>
+                  <th>lua chon </th>
+                  <th>STT</th>
+                </thead>";
+                foreach($xaphuong as xp)
+                    echo "<TR >
+                              <td class="trung"><input value="".""</td>
+                          </tr>"
     } */
 }
