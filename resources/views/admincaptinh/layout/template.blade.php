@@ -14,6 +14,8 @@
         <link href="fontend_admin/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="fontend_admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="fontend_admin/layout/layout.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css"  >
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
         @yield('css')
     </head>
     <body style="background-color: #e7e8e9;">
@@ -92,13 +94,15 @@
                             <li class="lev1 f4">
                                 <a class="title-ul" ><i class="fa fa-file fa-2x"></i>&nbsp;Quản Lý Văn Bản<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level ">
-                                    <li>
+                                    <!-- <li>
                                         <a href="admincaptinh/vanban/uploadthongbao" class="title-li">Thêm Thông Báo</a>
-                                    </li>
-                                    <li>
+                                    </li> -->
+                                    <!-- <li>
                                         <a href="admincaptinh/vanban/danhsachthongbao" class="title-li">Danh Sách Thông Báo</a>
+                                    </li> -->
+                                    <li>
+                                        <a href="admincaptinh/vanban/danhsachthongbaomodal" class="title-li">Danh Sách Thông Báo</a>
                                     </li>
-                                    
                                     <li>
                                         <a href="admincaptinh/vanban/taodon" class="title-li">Tạo Đơn</a>
                                     </li>
@@ -107,10 +111,10 @@
                                     </li>
                                     <li>
                                         <a href="admincaptinh/vanban/danhsachdontu" class="title-li">Danh Sách Đơn</a>
-                                    </li>
+                                    </li><!-- 
                                     <li>
                                         <a href="admincaptinh/vanban/guidon" class="title-li">Gửi Thông Báo</a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
@@ -203,5 +207,6 @@
         <!-- quan -->
         <script src="fontend_admin/bootstrap/js/bootstrap.min.js" ></script>
         <script src="fontend_admin/layout/layout.js"></script>
+        
     </body>
 </html>

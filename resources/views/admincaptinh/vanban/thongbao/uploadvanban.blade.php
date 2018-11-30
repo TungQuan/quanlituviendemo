@@ -86,7 +86,7 @@
                                 <label class="control-label col-sm-4 " for="inputName">
                                 Tên thông báo:</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control " id="inputTen" name="tenvanban" placeholder="Nhập Tên Văn Bản" required>
+                                    <input type="text" class="form-control " id="inputTen" name="tenvanban" placeholder="Nhập Tên Thông Báo" required>
                                 </div>
                                 <span style="color: red;">
                                         {{$errors->first('ten')}}

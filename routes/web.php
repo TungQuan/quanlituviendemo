@@ -104,15 +104,21 @@ Route::group(['middleware'=>['membermiddleware','logoutmiddleware']], function()
 		
 		Route::group(['prefix'=>'vanban'],function(){
 			Route::get('danhsachthongbao', 'VanBanController@getDanhSach');
+			Route::get('danhsachthongbaomodal', 'VanBanController@getDanhSachModal');
 			Route::get('uploadthongbao','VanBanController@getVanBan');
 			Route::post('uploadthongbao','VanBanController@postVanban');
+			Route::post('uploadthongbaomodal','VanBanController@postVanbanModal');
+			Route::post('suathongbao','VanBanController@postSuaVanBan');
+			Route::post('xoathongbao','VanBanController@postXoaVanBan');
 
 			Route::get('danhsachdontu','PDFController@getDanhSachDon');
 			Route::get('taodon','PDFController@getDon');
-			Route::get('uploaddontu','PDFController@getDonToUpload');
+			// Route::get('uploaddontu','PDFController@getDonToUpload');
 			Route::post('uploaddontu','PDFController@postDonToUpload');
+			Route::post('suadon','PDFController@postSuaDon');
+			Route::post('xoadon','PDFController@postXoaDon');
 			Route::get('trangthai/{id}','PDFController@getTrangThai');
-			Route::get('guidon','PDFController@getGuiDon');
+			// Route::get('guidon','PDFController@getGuiDon');
 		});
 			///--- Kết Thúc Văn Bản ------------//
 

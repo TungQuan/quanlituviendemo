@@ -14,6 +14,7 @@ use App;
 use View;
 use Carbon\Carbon;
 use Dompdf\Dompdf;
+use Alert;
 class PDFController extends Controller
 {
     //
@@ -56,7 +57,8 @@ class PDFController extends Controller
         $tangniid = $user->id_tangni;
         $roleid = $this->getRoleID($userid);
         $phapdanh = $this->getPhapDanh($tangniid);
-        $dontu=DB::table('dontu')->select('*')->get();
+        // $dontu=DB::table('dontu')->select('*')->get();
+        $dontu = DB::table('dontu')->paginate(5);
         if($roleid === 1){
             return view('admincaptinh/vanban/dontu/danhsachdon',['dontu'=>$dontu,'phapdanh'=>$phapdanh]);
         }
@@ -73,40 +75,32 @@ class PDFController extends Controller
             return view('nguoidungthuong/vanban/dontu/danhsachdon',['dontu'=>$dontu,'phapdanh'=>$phapdanh]);
         }
     }
-    public function getDonToUpload()
-    {
-        $user = Auth::guard('user')->user();
-        $userid = $user->id;
-        $tangniid = $user->id_tangni;
-        $roleid = $this->getRoleID($userid);
-        $phapdanh = $this->getPhapDanh($tangniid);
-        $dontu=DB::table('dontu')->select('*')->get();
-        if($roleid === 1){
-            return view('admincaptinh/vanban/dontu/uploaddon',['dontu'=>$dontu,'phapdanh'=>$phapdanh]);
-        }
-        else if($roleid === 2){
-            return view('admincaphuyen/vanban/dontu/uploaddon',['dontu'=>$dontu,'phapdanh'=>$phapdanh]);
-        }
-        else if($role_id === 3 ){
-            return view('admincapxa/vanban/dontu/uploaddon',['dontu'=>$dontu,'phapdanh'=>$phapdanh]);
-        }
-        else if($role_id === 4 ){
-            return view('admincaptuvien/vanban/dontu/uploaddon',['dontu'=>$dontu,'phapdanh'=>$phapdanh]);
-        }
-        else{
-            return view('nguoidungthuong/vanban/dontu/uploaddon',['dontu'=>$dontu,'phapdanh'=>$phapdanh]);
-        }
-    }
+    // public function getDonToUpload()
+    // {
+    //     $user = Auth::guard('user')->user();
+    //     $userid = $user->id;
+    //     $tangniid = $user->id_tangni;
+    //     $roleid = $this->getRoleID($userid);
+    //     $phapdanh = $this->getPhapDanh($tangniid);
+    //     $dontu=DB::table('dontu')->select('*')->get();
+    //     if($roleid === 1){
+    //         return view('admincaptinh/vanban/dontu/uploaddon',['dontu'=>$dontu,'phapdanh'=>$phapdanh]);
+    //     }
+    //     else if($roleid === 2){
+    //         return view('admincaphuyen/vanban/dontu/uploaddon',['dontu'=>$dontu,'phapdanh'=>$phapdanh]);
+    //     }
+    //     else if($role_id === 3 ){
+    //         return view('admincapxa/vanban/dontu/uploaddon',['dontu'=>$dontu,'phapdanh'=>$phapdanh]);
+    //     }
+    //     else if($role_id === 4 ){
+    //         return view('admincaptuvien/vanban/dontu/uploaddon',['dontu'=>$dontu,'phapdanh'=>$phapdanh]);
+    //     }
+    //     else{
+    //         return view('nguoidungthuong/vanban/dontu/uploaddon',['dontu'=>$dontu,'phapdanh'=>$phapdanh]);
+    //     }
+    // }
 
     public function postDonToUpload(request $request){
-        $this->validate($request,
-            ['tendon'=>'required|min:3|max:100',
-            'dontu'=>'required'
-            ],
-            [
-            'tendon.required'=>'Bạn chưa nhập tên đơn',
-            'dontu.required'=>'Bạn chưa chọn đơn'
-            ]);
 
         $tendon=$request->tendon;
         $ngaytao=carbon::now();
@@ -130,7 +124,8 @@ class PDFController extends Controller
         DB::table('dontu')->insertGetId( 
           ['tendon'=>$tendon, 'ghichu'=>$ghichu, 'ngaytao'=>$ngaytao, 'chondon'=>$dontu]
         );
-        return redirect('admincaptinh/vanban/uploaddontu')->with('thongbao','Thêm Thông Báo Thành Công!');
+        Alert::success('Thêm thành công!');
+        return redirect()->back();
    }
     public function getTrangThai($id){
         $dt=DB::table('dontu')->where('id', $id)->first();
@@ -144,32 +139,45 @@ class PDFController extends Controller
             ->where('id', $id)
             ->update(array('trangthai' => 0));
         }
+        Alert::success('Thêm thành công!');
         return redirect()->back();
     }
-    public function getGuiDon(){
-        $user = Auth::guard('user')->user();
-        $userid = $user->id;
-        $tangniid = $user->id_tangni;
-        $roleid = $this->getRoleID($userid);
-        $phapdanh = $this->getPhapDanh($tangniid);
-        if($roleid === 1){
-            $tuvien = DB::table('TuVien')->join('XaPhuong','TuVien.XaPhuongID','=','XaPhuong.XaPhuongID') 
-            -> join('QuanHuyen','XaPhuong.QuanHuyenID','=','QuanHuyen.QuanHuyenID')
-            ->join('TrangThai','TuVien.TrangThaiID','=','TrangThai.TrangThaiID')
-            ->select('TuVienID','TuVien_Ten','XaPhuong_Ten','QuanHuyen_Ten','TrangThai_Ten','trutri','phone','diachi')->get();
-            return view('admincaptinh/vanban/thongbao/guithongbao',['phapdanh'=>$phapdanh,'tuvien'=>$tuvien]);
+
+    public function postSuaDon(request $request){
+
+        $tendon=$request->tendon;
+        $ngaytao=carbon::now();
+        $ghichu=$request->ghichu;
+        $iddon=$request->iddon;
+        if ($request->hasFile('dontu'))
+        {
+            $file=$request->file('dontu');
+            $name = $file->getClientOriginalName();
+            $dontu1 = str_random(4)."_".$name;
+            while (file_exists('vanban/dontu/'.$dontu1))
+            {
+                $dontu1 = str_random(4)."_".$name;
+            }
+            $file->move('vanban/dontu',$dontu1);
+            $dontu=$dontu1;
+            $vanbanmoi=DB::table('dontu')->where('id',$iddon)->update( 
+              ['tendon'=>$tendon,'ngaytao'=>$ngaytao, 'ghichu'=>$ghichu, 'chondon'=>$dontu]);
+                Alert::success('Sửa thành công!');
+              return redirect()->back();
         }
-        else if($roleid === 2){
-            return view('admincaphuyen/vanban/thongbao/guithongbao',['phapdanh'=>$phapdanh]);
+        else 
+        {
+            $vanbanmoi=DB::table('dontu')->where('id',$iddon)->update( 
+              ['tendon'=>$tendon,'ngaytao'=>$ngaytao, 'ghichu'=>$ghichu]);
+                Alert::success('Sửa thành công!');
+              return redirect()->back();
         }
-        else if($role_id === 3 ){
-            return view('admincapxa/vanban/thongbao/guithongbao',['phapdanh'=>$phapdanh]);
-        }
-        else if($role_id === 4 ){
-            return view('admincaptuvien/vanban/thongbao/guithongbao',['phapdanh'=>$phapdanh]);
-        }
-        else{
-            return view('nguoidungthuong/vanban/thongbao/guithongbao',['phapdanh'=>$phapdanh]);
-        }
-    }
+   }
+
+   public function postXoaDon(Request $req)
+   {
+        DB::table('dontu')->where('id',$req->iddon)->delete();
+        Alert::success('Xóa thành công!');
+        return redirect()->back();  
+   }
 }
