@@ -39,6 +39,21 @@ $(".nav li ul").not(".action").css("display","none");
 @section('right-content')
 <div class="right-content">
     <div class="row">
+        <div class="col-md-6">
+            
+        </div>
+        <div  class="col-md-2 text-right" style="padding-bottom: 10px; padding-right: 0px">
+            <a href="admincaptinh/vanban/donxinxg" "email me"><button type="button" class="btn btn-success">Tạo đơn ngoài</button></a>
+        </div>
+        <div  class="col-md-1 text-right" style="padding-bottom: 10px; padding-right: 0px">
+            <button type="button" name="add" id="add" data-toggle="modal" data-target="#taodon" class="btn btn-success">Tạo đơn</button>
+        </div>
+
+        <div  class="col-md-3 text-left" style="padding-bottom: 10px; padding-right: 5px">
+            <button type="button" name="add" id="add" data-toggle="modal" data-target="#add_data_modal" class="btn btn-success">Thêm Đơn Vào Danh Sách</button>
+        </div>
+    </div>
+    <div class="row">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
@@ -49,13 +64,9 @@ $(".nav li ul").not(".action").css("display","none");
     </div>
     @include('sweet::alert')
     <!-- /.col-lg-12 -->
-    <div  class="row text-right" style="padding-bottom: 10px; padding-right: 10px">
-        <button type="button" name="add" id="add" data-toggle="modal" data-target="#add_data_modal" class="btn btn-warning">Thêm Đơn Vào Danh Sách</button>
-    </div>
-    <div  class="row text-right" style="padding-bottom: 10px; padding-right: 10px">
-        <button type="button" name="add" id="add" data-toggle="modal" data-target="#taodon" class="btn btn-warning">Tạo đơn</button>
-    </div>
-    <div class="row">
+    
+    
+    <div class="row" style="padding-right: 10px">
             <table class="table table-bordered table-hover">
                 <thead class="title-thead">
                     <tr>
@@ -76,7 +87,7 @@ $(".nav li ul").not(".action").css("display","none");
                     <tr>
                         <td class="center">{{$i}}</td>
                         <td>{{$dt->tendon}}</td>
-                        <td>{{$dt->ngaytao}}</td>
+                        <td>{{date('d-m-Y', strtotime($dt->ngaytao))}}</td>
                         @if($dt->trangthai == 1)
                         <td class="center"><a href="admincaptinh/vanban/trangthai/{{$dt->id}}" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Hiện</a></td>
                         
@@ -121,7 +132,7 @@ $(".nav li ul").not(".action").css("display","none");
                         <input type="text" name="ghichu" id="ghichu" class="form-control"/>
                         <br/>
                         <label>Chọn đơn: </label>
-                        <input type="file" name="dontu" id="dontu" class="form-control" required/>
+                        <input type="file" name="dontu" id="dontu" class="form-control" required accept="file_extension|.gif, .jpg, .png, .doc, .docx, .pdf"/>
                         <br/>
                         <input type="submit" name="them" id="them" value="Thêm đơn" class="btn btn-success">
                     </form>

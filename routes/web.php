@@ -113,7 +113,7 @@ Route::group(['middleware'=>['membermiddleware','logoutmiddleware']], function()
 
 			Route::get('danhsachdontu','PDFController@getDanhSachDon');
 			Route::get('taodon','PDFController@getDon');
-			// Route::get('uploaddontu','PDFController@getDonToUpload');
+			Route::get('donxinxg','PDFController@getDonXinXG');
 			Route::post('uploaddontu','PDFController@postDonToUpload');
 			Route::post('suadon','PDFController@postSuaDon');
 			Route::post('xoadon','PDFController@postXoaDon');

@@ -23,30 +23,30 @@ class VanBanController extends Controller
         return $roleid;
     }
 
-	public function getDanhSach(){
-		$user = Auth::guard('user')->user();
-        $userid = $user->id;
-        $tangniid = $user->id_tangni;
-        $roleid = $this->getRoleID($userid);
-        $phapdanh = $this->getPhapDanh($tangniid);
+	// public function getDanhSach(){
+	// 	$user = Auth::guard('user')->user();
+ //        $userid = $user->id;
+ //        $tangniid = $user->id_tangni;
+ //        $roleid = $this->getRoleID($userid);
+ //        $phapdanh = $this->getPhapDanh($tangniid);
 
-        $vanban=DB::table('vanban')->select('*')->get();
-        if($roleid === 1){       	
-			return view('admincaptinh/vanban/thongbao/danhsach',['vanban'=>$vanban,'phapdanh'=>$phapdanh]); 
-        }
-        else if($roleid === 2){
-            return view('admincaphuyen/vanban/thongbao/danhsach',['vanban'=>$vanban,'phapdanh'=>$phapdanh]);
-        }
-        else if($role_id === 3 ){
-            return view('admincapxa/vanban/thongbao/danhsach',['vanban'=>$vanban,'phapdanh'=>$phapdanh]);
-        }
-        else if($role_id === 4 ){
-            return view('admincaptuvien/vanban/thongbao/danhsach',['vanban'=>$vanban,'phapdanh'=>$phapdanh]);
-        }
-        else{
-            return view('nguoidungthuong/vanban/thongbao/danhsach',['vanban'=>$vanban,'phapdanh'=>$phapdanh]);
-        }
-	}
+ //        $vanban=DB::table('vanban')->select('*')->get();
+ //        if($roleid === 1){       	
+	// 		return view('admincaptinh/vanban/thongbao/danhsach',['vanban'=>$vanban,'phapdanh'=>$phapdanh]); 
+ //        }
+ //        else if($roleid === 2){
+ //            return view('admincaphuyen/vanban/thongbao/danhsach',['vanban'=>$vanban,'phapdanh'=>$phapdanh]);
+ //        }
+ //        else if($role_id === 3 ){
+ //            return view('admincapxa/vanban/thongbao/danhsach',['vanban'=>$vanban,'phapdanh'=>$phapdanh]);
+ //        }
+ //        else if($role_id === 4 ){
+ //            return view('admincaptuvien/vanban/thongbao/danhsach',['vanban'=>$vanban,'phapdanh'=>$phapdanh]);
+ //        }
+ //        else{
+ //            return view('nguoidungthuong/vanban/thongbao/danhsach',['vanban'=>$vanban,'phapdanh'=>$phapdanh]);
+ //        }
+	// }
 
     public function getDanhSachModal(){
         $user = Auth::guard('user')->user();
@@ -84,6 +84,7 @@ class VanBanController extends Controller
             $noidungtomtat=$request->noidungtomtat;
             $ngaynhan=carbon::now();
             $ghichu=$request->ghichu;
+            $ngaybanhanh=$request->ngaybanhanh;
             if ($request->hasFile('vanban'))
             {
                 $file=$request->file('vanban');
@@ -95,16 +96,19 @@ class VanBanController extends Controller
                 }
                 $file->move('vanban/thongbao',$vanban1);
                 $vanban=$vanban1;
-            }
-            else 
-            {
-                $vanban->vanban = null;
-            }
-            $vanbanmoi=DB::table('vanban')->insertGetId( 
-              ['tenvanban'=>$tenvanban,'congvanso'=>$congvanso,'noiphathanh'=>$noiphathanh,'vanban'=> $vanban, 'noidungtomtat'=>$noidungtomtat,'ngaynhan'=> $ngaynhan, 'ghichu'=>$ghichu]
+
+                $vanbanmoi=DB::table('vanban')->insertGetId( 
+              ['tenvanban'=>$tenvanban,'congvanso'=>$congvanso,'noiphathanh'=>$noiphathanh,'vanban'=> $vanban, 'noidungtomtat'=>$noidungtomtat,'ngaynhan'=> $ngaynhan,'ngaybanhanh'=>$ngaybanhanh, 'ghichu'=>$ghichu]
             );
             Alert::success('Thêm thành công!');
             return redirect()->back();
+            }
+            else 
+            {
+                Alert::error('Error Message', 'Có lỗi!!')->persistent('Đóng');
+                return redirect()->back();
+            }
+            
    }
 
      public function postSuaVanBan(request $request){
@@ -114,6 +118,7 @@ class VanBanController extends Controller
         $noidungtomtat=$request->noidungtomtat;
         $ngaynhan=carbon::now();
         $ghichu=$request->ghichu;
+        $ngaybanhanh=$request->ngaybanhanh;
         $idthongbao=$request->idthongbao;
             if ($request->hasFile('vanban'))
             {
@@ -128,14 +133,14 @@ class VanBanController extends Controller
                 $vanban=$vanban1;
                 
                 $vanbanmoi=DB::table('vanban')->where('id',$idthongbao)->update( 
-              ['tenvanban'=>$tenvanban,'congvanso'=>$congvanso,'noiphathanh'=>$noiphathanh,'vanban'=> $vanban, 'noidungtomtat'=>$noidungtomtat,'ngaynhan'=> $ngaynhan, 'ghichu'=>$ghichu]);
+              ['tenvanban'=>$tenvanban,'congvanso'=>$congvanso,'noiphathanh'=>$noiphathanh,'vanban'=> $vanban, 'noidungtomtat'=>$noidungtomtat,'ngaynhan'=> $ngaynhan,'ngaybanhanh'=>$ngaybanhanh, 'ghichu'=>$ghichu]);
                 Alert::success('Sửa thành công!');
               return redirect()->back();
             }
             else
             {
                 $vanbanmoi=DB::table('vanban')->where('id',$idthongbao)->update( 
-              ['tenvanban'=>$tenvanban,'congvanso'=>$congvanso,'noiphathanh'=>$noiphathanh, 'noidungtomtat'=>$noidungtomtat,'ngaynhan'=> $ngaynhan, 'ghichu'=>$ghichu]);
+              ['tenvanban'=>$tenvanban,'congvanso'=>$congvanso,'noiphathanh'=>$noiphathanh, 'noidungtomtat'=>$noidungtomtat,'ngaynhan'=> $ngaynhan,'ngaybanhanh'=>$ngaybanhanh, 'ghichu'=>$ghichu]);
                 Alert::success('Sửa thành công!');
               return redirect()->back();
             }   

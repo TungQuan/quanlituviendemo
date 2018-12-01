@@ -27,6 +27,7 @@ class PDFController extends Controller
         $roleid = DB::table('permission')->select('role_id')->where('user_id','=',$userid)->value('role_id');
         return $roleid;
     }
+    //-- ĐƠN XIN XUẤT GIA WITH MODAL
     public function getDon()
     {
     	$user = Auth::guard('user')->user();
@@ -50,6 +51,16 @@ class PDFController extends Controller
             return view('nguoidungthuong/vanban/dontu/donxinxuatgia',['phapdanh'=>$phapdanh]);
         }
     }
+    //-- ĐƠN XIN XUẤT GIA WITH MODAL
+
+
+    public function getDonXinXG()
+    {
+        return view('admincaptinh/vanban/dontu/demo');
+    }
+    //-- ĐƠN XIN XUẤT GIA GIAO DIỆN LỚN
+
+
     public function getDanhSachDon()
     {
         $user = Auth::guard('user')->user();
@@ -139,7 +150,7 @@ class PDFController extends Controller
             ->where('id', $id)
             ->update(array('trangthai' => 0));
         }
-        Alert::success('Thêm thành công!');
+        Alert::success('Thao tác thành công!');
         return redirect()->back();
     }
 

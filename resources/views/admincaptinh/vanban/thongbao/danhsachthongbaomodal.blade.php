@@ -39,6 +39,9 @@ text-align: center;
 <!-- Page Content -->
 @section('right-content')
 <div class="right-content">
+    <div  class=" text-right" style="padding-bottom: 10px; padding-right: 10px">
+                <button type="button" name="add" id="add" data-toggle="modal" data-target="#add_data_modal" class="btn btn-success">Thêm thông báo</button>
+                </div>
             <div class="row">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
@@ -50,10 +53,8 @@ text-align: center;
             </div>
             @include('sweet::alert')
             <!-- /.col-lg-12 -->
-            <div  class="row text-right" style="padding-bottom: 10px; padding-right: 10px">
-                <button type="button" name="add" id="add" data-toggle="modal" data-target="#add_data_modal" class="btn btn-warning">Thêm thông báo</button>
-            </div>
-            <div class="row">
+            
+            <div class="row" style="padding-right: 10px">
                 <div>
                     <table class="table table-bordered table-hover" id="table_vanban">
                         
@@ -62,9 +63,10 @@ text-align: center;
                                 <th class="center">STT</th>
                                 <th >Tên Văn Bản</th>
                                 <th>Công Văn Số</th>
+                                <th>Ngày Ban Hành</th>
                                 <th>Ngày Nhận</th>
-                                <th>Nơi phát hành</th>
-                                <th>Nội dung tóm tắt</th>
+                                <th>Nơi Phát Hành</th>
+                                <th>Nội Dung Tóm Tắt</th>
                                 <th>Ghi Chú </th>
                                 <th class="center">Tải Về</th>
                                 <th class="center">Sửa</th>
@@ -79,13 +81,14 @@ text-align: center;
                                 <td class="center">{{$i}}</td>
                                 <td>{{$vb->tenvanban}}</td>
                                 <td>{{$vb->congvanso}}</td>
-                                <td>{{$vb->ngaynhan}}</td>
+                                <td>{{date('d-m-Y', strtotime($vb->ngaybanhanh))}}</td>
+                                <td>{{date('d-m-Y', strtotime($vb->ngaynhan))}}</td>
                                 <td>{{$vb->noiphathanh}}</td>
                                 <td>{{$vb->noidungtomtat}}</td>
                                 <td>{{$vb->ghichu}}</td>
                                 <td  class="center"><a href="vanban/thongbao/{{$vb->vanban}}"><span class="glyphicon glyphicon-file fa-2x"></span></a></td>
 
-                                <td><button class="btn btn-info btn-sm" type="button" name="edit" id="edit" data-toggle="modal" data-target="#edit_data_modal" data-tenvanban="{{$vb->tenvanban}}" data-congvanso="{{$vb->congvanso}}" data-ngaynhan="{{$vb->ngaynhan}}" data-noiphathanh="{{$vb->noiphathanh}}" data-noidungtomtat="{{$vb->noidungtomtat}}" data-ghichu="{{$vb->ghichu}}" data-idthongbao="{{$vb->id}}"> <span class="glyphicon glyphicon-edit"></span></button></td>
+                                <td><button class="btn btn-info btn-sm" type="button" name="edit" id="edit" data-toggle="modal" data-target="#edit_data_modal" data-tenvanban="{{$vb->tenvanban}}" data-congvanso="{{$vb->congvanso}}" data-ngaynhan="{{$vb->ngaynhan}}" data-noiphathanh="{{$vb->noiphathanh}}" data-noidungtomtat="{{$vb->noidungtomtat}}" data-ghichu="{{$vb->ghichu}}" data-idthongbao="{{$vb->id}}" data-ngaybanhanh="{{$vb->ngaybanhanh}}" > <span class="glyphicon glyphicon-edit"></span></button></td>
 
                                 <td  class="center"><button class="btn btn-danger btn-sm" type="button" name="delete" id="delete" data-toggle="modal" data-target="#delete_data_modal" data-tenvanband="{{$vb->tenvanban}}" data-idthongbao="{{$vb->id}}"><span class="glyphicon glyphicon-trash"></span></button></td>
                             </tr>
@@ -118,19 +121,23 @@ text-align: center;
                         <input type="text" name="tenvanban" id="tenvanban" class="form-control" required pattern=".{3,100}" title="Tên văn bản phải có độ dài trên 3 ký tự"/>
                         <br/>
                         <label>Công văn số: </label>
-                        <input type="text" name="congvanso" id="congvanso" class="form-control"/>
+                        <input type="text" name="congvanso" id="congvanso" class="form-control" pattern=".{0,150}" title="độ dài tối đa là 150 ký tự"/>
                         <br/>
                         <label>Nơi phát hành: </label>
-                        <input type="text" name="noiphathanh" id="noiphathanh" class="form-control" required/>
+                        <input type="text" name="noiphathanh" id="noiphathanh" class="form-control" required pattern=".{3,150}" title="độ dài phải trên 3 ký tự và tối đa là 150 ký tự"/>
+                        <br/>
+                        <br/>
+                        <label>Ngày ban hành: </label>
+                        <input type="date" name="ngaybanhanh" id="ngaybanhanh" class="form-control" data-date-format="DD MMMM YYYY" min='1970-01-01' max='2050-01-01' required />
                         <br/>
                         <label>Nội dung tóm tắt: </label>
-                        <input type="text" name="noidungtomtat" id="noidungtomtat" class="form-control"/>
+                        <textarea name="noidungtomtat" id="noidungtomtat" class="form-control" pattern=".{0,255}" title="độ dài tối đa là 255 ký tự"></textarea>
                         <br/>
                         <label>Ghi chú: </label>
-                        <input type="text" name="ghichu" id="ghichu" class="form-control"/>
+                        <input type="text" name="ghichu" id="ghichu" class="form-control" pattern=".{0,150}" title="độ dài tối đa là 150 ký tự"/>
                         <br/>
                         <label>Chọn văn bản: </label>
-                        <input type="file" name="vanban" id="vanban" class="form-control" required/>
+                        <input type="file" name="vanban" id="vanban" class="form-control" required accept="file_extension|.gif, .jpg, .png, .doc, .docx, .pdf"/>
                         <br/>
                         <input type="submit" name="them" id="them" value="Thêm thông báo" class="btn btn-success">
                     </form>
@@ -163,8 +170,11 @@ text-align: center;
                         <label>Nơi phát hành: </label>
                         <input type="text" name="noiphathanh" id="noiphathanh" class="form-control" required/>
                         <br/>
+                        <label>Ngày ban hành: </label>
+                        <input type="date" name="ngaybanhanh" id="ngaybanhanh" class="form-control" data-date-format="DD MMMM YYYY" min='1970-01-01' max='2050-01-01'/>
+                        <br/>
                         <label>Nội dung tóm tắt: </label>
-                        <input type="text" name="noidungtomtat" id="noidungtomtat" class="form-control"/>
+                        <textarea name="noidungtomtat" id="noidungtomtat" class="form-control"></textarea>
                         <br/>
                         <label>Ghi chú: </label>
                         <input type="text" name="ghichu" id="ghichu" class="form-control"/>
@@ -219,6 +229,7 @@ text-align: center;
         var noiphathanh=button.data('noiphathanh')
         var noidungtomtat=button.data('noidungtomtat')
         var ghichu=button.data('ghichu')
+        var ngaybanhanh=button.data('ngaybanhanh')
         var idthongbao=button.data('idthongbao')
         var modal=$(this)
         modal.find('.modal-body #tenvanban').val(tenvanban)
@@ -226,6 +237,7 @@ text-align: center;
         modal.find('.modal-body #noiphathanh').val(noiphathanh)
         modal.find('.modal-body #noidungtomtat').val(noidungtomtat)
         modal.find('.modal-body #ghichu').val(ghichu)
+        modal.find('.modal-body #ngaybanhanh').val(ngaybanhanh)
         modal.find('.modal-body #idthongbao').val(idthongbao)
     //---EDIT DATA
     });
