@@ -11,161 +11,146 @@
     <link href="fontend_admin/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- js map -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD57PRHJQSQ5XQOuNtAWpRBOP-UCX5pSzA&sensor=false"></script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-     <!--Memuil Menu CSS -->
-
-     <link href="fontend_admin/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
-
+    <!--Memuil Menu CSS -->
+    <link href="fontend_admin/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
     <!--css datatable //-->
-   
-    <link href="fontend_admin/datatables/css/jquery.dataTables.css" rel="stylesheet"> 
+    
+    <link href="fontend_admin/datatables/css/jquery.dataTables.css" rel="stylesheet">
     
     <!-- Memu CSS -->
     <link href="fontend_admin/menu/css/sb-admin-2.css" rel="stylesheet">
-
     <!-- Các Icon - Fonts -->
     <link href="fontend_admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- DataTables CSS  
+    <!-- DataTables CSS
     <link href="fontend_admin/dataTables/css/dataTables.bootstrap.min.css" rel="stylesheet">-->
-    <!-- DataTables Responsive CSS 
+    <!-- DataTables Responsive CSS
     <link href="fontend_admin/datatables-responsive/css/responsive.dataTables.css" rel="stylesheet">
--->
+    -->
     <link href="fontend_admin/datatables-responsive/css/responsive.dataTables.min.css" rel="stylesheet">
-            <!-- quan -->
-<script>
-        $(document).ready(function(){
-        var i=0;
-        $('#add1').click(function(){
-        i++;
-        $('#addcontent1').append('<tr id="row2'+i+'"> <td><b><input name="inp_left'+i+'" type="text" style="border: none; border-bottom: 1px dotted black;width:100px">:</b></td> <td><input name="inp_right'+i+'" type=" text" style="border: none; border-bottom: 1px dotted black; width:500px"></td> <td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_removea" style="margin-left:10px">-</button></td> </tr> ');
-        });
-        $(document).on('click', '.btn_removea', function(){
-        var button_id = $(this).attr("id");
-        $('#row2'+button_id+'').remove();
-        });
-        $('#submit').click(function(){
-        $.ajax({
-        url:"name.php",
-        method:"POST",
-        data:$('#add_name').serialize(),
-        success:function(data)
-        {
-        alert(data);
-        $('#add_name')[0].reset();
-        }
-        });
-        });
-        });
-</script>
-<script>
-        $(document).ready(function(){
-        var i=0;
-        $('#add2').click(function(){
-        i++;
-        $('#addcontent2').append('<tr id="row'+i+'"> <td><input name="nd'+i+'" type=" text" style="border: none; border-bottom: 1px dotted black; width:605px"></td> <td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_removeb" style="margin-left:10px">-</button></td> </tr> ');
-        });
-        $(document).on('click', '.btn_removeb', function(){
-        var button_id = $(this).attr("id");
-        $('#row'+button_id+'').remove();
-        });
-        $('#submit').click(function(){
-        $.ajax({
-        url:"name.php",
-        method:"POST",
-        data:$('#add_name').serialize(),
-        success:function(data)
-        {
-        alert(data);
-        $('#add_name')[0].reset();
-        }
-        });
-        });
-        });
-        </script>
-        <!-- quan -->
-<!-- Bootstrap Core JavaScript -->
+    <!-- quan -->
+    <script>
+    $(document).ready(function(){
+    var i=0;
+    $('#add1').click(function(){
+    i++;
+    $('#addcontent1').append('<tr id="row2'+i+'"> <td><b><input name="inp_left'+i+'" type="text" style="border: none; border-bottom: 1px dotted black;width:100px">:</b></td> <td><input name="inp_right'+i+'" type=" text" style="border: none; border-bottom: 1px dotted black; width:500px"></td> <td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_removea" style="margin-left:10px">-</button></td> </tr> ');
+    });
+    
+    $(document).on('click', '.btn_removea', function(){
+    var button_id = $(this).attr("id");
+    $('#row2'+button_id+'').remove();
+    });
+    $('#submit').click(function(){
+    $.ajax({
+    url:"name.php",
+    method:"POST",
+    data:$('#add_name').serialize(),
+    success:function(data)
+    {
+    alert(data);
+    $('#add_name')[0].reset();
+    }
+    });
+    });
+    });
+    </script>
+    <script>
+    $(document).ready(function(){
+    var i=0;
+    $('#add2').click(function(){
+    i++;
+    $('#addcontent2').append('<tr id="row'+i+'"> <td><input name="nd'+i+'" type=" text" style="border: none; border-bottom: 1px dotted black; width:605px"></td> <td><button type="button" name="remove" id="' + i +'" class="btn btn-danger btn_removeb" style="margin-left:10px">-</button></td> </tr> ');
+    });
+    $(document).on('click', '.btn_removeb', function(){
+    var button_id = $(this).attr("id");
+    $('#row'+button_id+'').remove();
+    });
+    
+    $('#submit').click(function(){
+    $.ajax({
+    url:"name.php",
+    method:"POST",
+    data:$('#add_name').serialize(),
+    success:function(data)
+    {
+    alert(data);
+    $('#add_name')[0].reset();
+    }
+    });
+    });
+    });
+    </script>
+    <!-- quan -->
+    <!-- Bootstrap Core JavaScript -->
     <script src="fontend_admin/bootstrap/js/bootstrap.min.js"></script>
-
     <!-- Metis Menu Plugin JavaScript -->
     <script src="fontend_admin/metisMenu/dist/metisMenu.min.js"></script>
-
     <!-- Custom Menu JavaScript -->
     <script src="fontend_admin/menu/js/sb-admin-2.js"></script>
-
     <!-- DataTables JavaScript-->
     <script src="fontend_admin/dataTables/js/jquery.dataTables.min.js" async></script>
     
     <!--Datatbles bootstrap  -->
-
     <script src="fontend_admin/dataTables/js/dataTables.bootstrap.min.js" async></script>
     
     <!-- phone sdt format -->
-
     <script src="fontend_admin/formBootstrap/js/bootstrap-formhelpers-phone.js" ></script>
     <script src="fontend_admin/formBootstrap/js/bootstrap-formhelpers-datepicker.js">
-</script>
-     <!-- Javascript Personal -->
-<script src="fontend_admin/datatables-responsive/js/dataTables.responsive.min.js" type="text/javascript" async defer></script>
-<script src="fontend_admin/script_custom/custom.js"></script>
-<style>
-.title-thead{
-background-color: #DF3A01;
-color: #FFFFFF;
-font-size: 18px;
-text-align: center;
-border-radius: 20px 20px 0px 0px;
-font-weight: bold;
-}
-.title-tr:hover{
-font-weight: bold;
-}
-.icon-file{
-margin-bottom: 5px;
-}
-body {
-background: rgb(204,204,204);
-}
-/* body {
-background: rgb(204,204,204);
-}
-page[size="A4"] {
-background: white;
-width: 21cm;
-height: 29.7cm;
-display: block;
-margin: 0 auto;
-margin-bottom: 0.5cm;
-box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
-}
-.a4{
-padding-top: 40px;
-} */
-
-
-
-.page {
-  background: white;
-  width: 21cm;
-  min-height: 29.7cm;
-  margin: 1cm auto;
-  border: 1px #D3D3D3 solid;
-  border-radius: 5px;
-  background: white;
-  box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
-  display: block;
-}
-
-
-@page {
-  size: A4;
-  margin: 0;
-}
-
-@media print {
-  .page {
+    </script>
+    <!-- Javascript Personal -->
+    <script src="fontend_admin/datatables-responsive/js/dataTables.responsive.min.js" type="text/javascript" async defer></script>
+    <script src="fontend_admin/script_custom/custom.js"></script>
+    <style>
+    .title-thead{
+    background-color: #DF3A01;
+    color: #FFFFFF;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 20px 20px 0px 0px;
+    font-weight: bold;
+    }
+    .title-tr:hover{
+    font-weight: bold;
+    }
+    .icon-file{
+    margin-bottom: 5px;
+    }
+    body {
+    background: rgb(204,204,204);
+    }
+    /* body {
+    background: rgb(204,204,204);
+    }
+    page[size="A4"] {
+    background: white;
+    width: 21cm;
+    height: 29.7cm;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 0.5cm;
+    box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+    }
+    .a4{
+    padding-top: 40px;
+    } */
+    .page {
+    background: white;
+    width: 21cm;
+    min-height: 29.7cm;
+    margin: 1cm auto;
+    border: 1px #D3D3D3 solid;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+    display: block;
+    }
+    @page {
+    size: A4;
+    margin: 0;
+    }
+    @media print {
+    .page {
     margin: 0;
     border: initial;
     border-radius: initial;
@@ -174,102 +159,105 @@ padding-top: 40px;
     box-shadow: initial;
     background: initial;
     page-break-after: always;
-  }
-}
-#quochieu{
-padding-left: 40px;
-padding-top: 30px;
-padding-top: 60px;
-}
-#tieungu{
-padding-left: 50px;
-}
-hr{
-width: 80px;
-border: dashed;
-border-width: 1px;
-width: 120px;
-}
-.hr1{
-padding-right: 60px;
-}
-.tendon{
-text-align: center;
-font-size: 20px;
-font-weight: bold;
-padding-top: 50px;
-width: 100%;
-}
-.loichao{
-padding-left: 120px;
-padding-top: 20px;
-}
-.trutri{
-padding-left: 80px;
-padding-top: 20px;
-}
-#nguoigui{
-padding-left: 80px;
-padding-top: 5px;
-}
-#ngaylamdon{
-text-align: right;
-padding-right: 50px;
-padding-top: 30px;
-}
-#kytentrai{
-margin-left: 100px;
-text-align: center;
-}
-#kytenphai{
-text-align: center;
-margin-right: 100px;
-}
-.tbtop{
-padding-top: 80px;
-padding-left: 20px;
-}
-.tbleft{
-}
-.tbright{
-padding-left: 0px;
-}
-textarea{
-border: none;
-text-align: center;
-width: 60%;
-margin-left: 50px;
-}
-#fill{
-border: none;
-border-bottom: 1px dotted black;
-}
-.noidung{
-margin-left: 100px;
-padding-top: 10px;
-}
-.btn1{
-margin-left: 10px;
-}
-.btn-pdf{
-  padding-right: 10px;
-  float: right;
-}
-@media print {
-  #printPageButton {
+    }
+    }
+    #quochieu{
+    padding-left: 40px;
+    padding-top: 30px;
+    padding-top: 60px;
+    }
+    #tieungu{
+    padding-left: 50px;
+    }
+    hr{
+    width: 80px;
+    border: dashed;
+    border-width: 1px;
+    width: 120px;
+    }
+    .hr1{
+    padding-right: 60px;
+    }
+    .tendon{
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 50px;
+    width: 100%;
+    }
+    .loichao{
+    padding-left: 120px;
+    padding-top: 20px;
+    }
+    .trutri{
+    padding-left: 80px;
+    padding-top: 20px;
+    }
+    #nguoigui{
+    padding-left: 80px;
+    padding-top: 5px;
+    }
+    #ngaylamdon{
+    text-align: right;
+    padding-right: 50px;
+    padding-top: 30px;
+    }
+    #kytentrai{
+    margin-left: 100px;
+    text-align: center;
+    }
+    #kytenphai{
+    text-align: center;
+    margin-right: 100px;
+    }
+    .tbtop{
+    padding-top: 80px;
+    padding-left: 20px;
+    }
+    .tbleft{
+    }
+    .tbright{
+    padding-left: 0px;
+    }
+    textarea{
+    border: none;
+    text-align: center;
+    width: 60%;
+    margin-left: 50px;
+    }
+    #fill{
+    border: none;
+    border-bottom: 1px dotted black;
+    }
+    .noidung{
+    margin-left: 100px;
+    padding-top: 10px;
+    }
+    .btn1{
+    margin-left: 10px;
+    }
+    .btn-pdf{
+    padding-right: 10px;
+    float: right;
+    }
+    @media print {
+    #printPageButton {
     display: none;
-  }
-  #add1{
+    }
+    #add1{
     display: none;
-  }
-  #add2{
+    }
+    #add2{
     display: none;
-  }
-}
-</style>
-</head>
-<body>
-<!-- Page Content -->
+    }
+    /* #kun{
+    display: none;
+    } */
+    }
+    </style>
+  </head>
+  <body>
+    <!-- Page Content -->
     <!-- /.col-lg-12 -->
     <div class="book">
       <div class="page">
@@ -278,8 +266,8 @@ margin-left: 10px;
             <tr>
               <div class="tbleft">
                 <td>
-                    <textarea name="kyhieutrai" rows="2" cols="50" placeholder="Nhập Tên Trung Tâm" id="kyhieutrai"></textarea>
-                    <div class="hr1"><hr style="margin-top: 10px"></div>
+                  <textarea name="kyhieutrai" rows="2" cols="50" placeholder="Nhập Tên Trung Tâm" id="kyhieutrai"></textarea>
+                  <div class="hr1"><hr style="margin-top: 10px"></div>
                 </td>
               </div>
               
@@ -345,7 +333,6 @@ margin-left: 10px;
           </div>
         </div>
         <!-- ngày làm đơn -->
-
         <div class="row">
           <div id="ngaylamdon">
             <p> ...............,Ngày ........... tháng ........... năm ..........</p>
@@ -368,23 +355,28 @@ margin-left: 10px;
           <button onclick="myFunction()" id="printPageButton" class="btn-danger">Print this page</button>
         </div>
         <script>
-        function myFunction() {
-             placeholderVal = document.getElementById("tendon").placeholder;
-     document.getElementById("tendon").placeholder = "";
-            placeholderVal = document.getElementById("kyhieutrai").placeholder;
-     document.getElementById("kyhieutrai").placeholder = "";
-            placeholderVal = document.getElementById("kytentrai").placeholder;
-     document.getElementById("kytentrai").placeholder = "";
-            placeholderVal = document.getElementById("kytenphai").placeholder;
-     document.getElementById("kytenphai").placeholder = "";
+        $(document).ready(function() {
+        $('#printPageButton').click(function() {
+        placeholderVal = document.getElementById("tendon").placeholder;
+        document.getElementById("tendon").placeholder = "";
+        placeholderVal = document.getElementById("kyhieutrai").placeholder;
+        document.getElementById("kyhieutrai").placeholder = "";
+        placeholderVal = document.getElementById("kytentrai").placeholder;
+        document.getElementById("kytentrai").placeholder = "";
+        placeholderVal = document.getElementById("kytenphai").placeholder;
+        $('.btn_removeb').hide();
+        $('.btn_removea').hide();
+        document.getElementById("kytenphai").placeholder = "";
         window.print();
-        }
+        });
+        });
+        
         </script>
         <!-- <div class="btn-pdf">
           <button class="btn btn-danger" id="printPageButton" onClick="window.print();">Print</button>
         </div> -->
       </div>
     </div>
-<!-- /#page-wrapper -->
-</body>
+    <!-- /#page-wrapper -->
+  </body>
 </html>
